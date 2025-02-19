@@ -20,7 +20,9 @@ class Api::V1::LinksController < ApplicationController
   def show
     link = Link.find_by(short_code: params[:short_code])
     render json: { error: "Link not found" }, status: :not_found if link.blank?
-    redirect_to link.original_url, allow_other_host: true
+    og_url = link.original_url
+    raise StandardError.new "No longer exists" unless valid_url?(og_url)
+    redirect_to og_url, allow_other_host: true
   rescue StandardError => e
     render json: { error: e.message }, status: :unprocessable_entity
   end
