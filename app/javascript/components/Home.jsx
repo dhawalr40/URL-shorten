@@ -39,6 +39,7 @@ const Home = () => {
             navigator.clipboard
                 .writeText(textToCopy)
                 .then(() => {
+                    alert( `${textToCopy}` + "Copied Successfully.")
                 })
                 .catch((error) => {
                     console.error("Failed to copy text:", error);
@@ -71,8 +72,8 @@ const Home = () => {
                         <div className="card-body">
                             <p className="card-text"> <span className="fw-bold"> Original Url: </span> {url.original_url}</p>
                             <p className="card-text"><span
-                                className="fw-bold"> shorten Url:</span> <span className="shorten-url"> {`${baseUrl}/${url.short_code}`} </span>
-                                <span className="bi-copy" style={{cursor:"pointer"}} onClick={copyShortUrl("shorten-url")}></span> </p>
+                                className="fw-bold"> shorten Url:</span> <span className={`shorten-url-${url.short_code}`}> {`${baseUrl}/${url.short_code}`} </span>
+                                <span className="bi-copy" style={{cursor:"pointer"}} onClick={()=>copyShortUrl(`shorten-url-${url.short_code}`)}></span> </p>
                             <a href={`${baseUrl}/${url.short_code}`} className="btn btn-primary"
                                target="_blank"
                                rel="noopener noreferrer">
